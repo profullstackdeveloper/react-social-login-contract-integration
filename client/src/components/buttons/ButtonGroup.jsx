@@ -15,14 +15,16 @@ const ButtonContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: ${props => props.index == 0 ? '20px 0px 0px 20px' : props.index == props.end - 1 ? '0px 20px 20px 0px' : '0px'};
+    border-radius: ${props => props.index === 0 ? '20px 0px 0px 20px' : props.index === props.end - 1 ? '0px 20px 20px 0px' : '0px'};
     background-color: ${props => props.active ? '#6b5b95' : '#40434e' };
     cursor: pointer;
 `
 
 const Button = ({content, handleClick, index, end, url}) => {
+    const params = useParams();
+    console.log(params);
     return (
-        <ButtonContainer index={index} end={end} onClick={() => handleClick(url)} active={window.location.pathname === url}>
+        <ButtonContainer index={index} end={end} onClick={() => handleClick(url)} active={params['*'] === url}>
             {content}
         </ButtonContainer>
     )
@@ -30,7 +32,6 @@ const Button = ({content, handleClick, index, end, url}) => {
 
 export default function ButtonGroup({buttons}) {
     const navigation = useNavigate();
-    console.log('params', window.location.pathname);
     return (
         <Container>
             {

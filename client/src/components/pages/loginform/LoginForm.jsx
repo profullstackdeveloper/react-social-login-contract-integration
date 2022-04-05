@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ButtonGroup from '../../buttons/ButtonGroup';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
@@ -37,25 +37,25 @@ export default function LoginForm() {
     const buttons = [
         {
             content: 'SignIn',
-            url: '/login',
+            url: 'login',
         },
         {
             content: 'SignUp',
-            url: '/register',
+            url: 'register',
         }
     ]
     return (
         <Container>
             <FormContainer>
-                <BrowserRouter>
-                    <ButtonContainer>
-                        <ButtonGroup buttons={buttons}></ButtonGroup>
-                    </ButtonContainer>
-                    <Routes >
-                        <Route path='/login' element={<SignIn></SignIn>}></Route>
-                        <Route path='/register' element={<SignUp></SignUp>}></Route>
-                    </Routes>
-                </BrowserRouter>
+                <ButtonContainer>
+                    <ButtonGroup buttons={buttons}></ButtonGroup>
+                </ButtonContainer>
+                <Routes>
+                    <Route path='login' element={<SignIn></SignIn>}></Route>
+                    <Route path='register' element={<SignUp></SignUp>}></Route>
+                    <Route path='*' element={<SignIn/>}></Route>
+                </Routes>
+                
             </FormContainer>
         </Container>
     )
