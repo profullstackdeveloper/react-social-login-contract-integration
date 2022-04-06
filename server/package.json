@@ -17,6 +17,7 @@
     "jwt-encode": "^1.0.1",
     "mongoose": "^6.2.9",
     "morgan": "~1.9.1",
-    "nodemailer": "^6.7.3"
+    "nodemailer": "^6.7.3",
+    "nodemon": "^2.0.15"
   }
 }

@@ -17,7 +17,7 @@ export default function SignIn() {
     const navigate = useNavigate();
     const {currentAccount} = React.useContext(Web3Context);
     const handleResolve = (provider, data) => {
-        axios.post('http://localhost:3000/api/googleSignUp', {
+        axios.post('http://localhost:5000/api/googleSignUp', {
             email: data.email,
             fullName: data.name,
             wallet: currentAccount

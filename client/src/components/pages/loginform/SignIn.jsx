@@ -22,7 +22,7 @@ export default function SignIn() {
     const {currentAccount, setCurrentAccount} = React.useContext(Web3Context);
     const navigate = useNavigate();
     const handleResolve = async (provider, data) => {
-        axios.post('http://localhost:3000/api/signIn', {
+        axios.post('http://localhost:5000/api/signIn', {
             email: data.email,
             fullName: data.name,
             wallet: currentAccount
