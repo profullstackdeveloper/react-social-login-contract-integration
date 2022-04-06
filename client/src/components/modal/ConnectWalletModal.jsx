@@ -54,7 +54,6 @@ export default function ConnectWalletModal ({isOpen=true, onClose, walletStatus=
     const connectWallet = async () => {
         const web3 = new Web3(provider);
         const accounts = await web3.eth.requestAccounts();
-        console.log(accounts);
         localStorage.setItem('account', accounts[0]);
         setCurrentAccount(accounts[0]);
         onClose(false);

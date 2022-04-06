@@ -17,7 +17,6 @@ export default function SignIn() {
     const navigate = useNavigate();
     const {currentAccount} = React.useContext(Web3Context);
     const handleResolve = (provider, data) => {
-        console.log("handleResolve called!")
         axios.post('http://localhost:3000/api/googleSignUp', {
             email: data.email,
             fullName: data.name,
@@ -27,32 +26,25 @@ export default function SignIn() {
                 console.log('error occurred!')
             }
             if (response.status == 200) {
-                console.log(response.data);
                 localStorage.setItem('user', JSON.stringify(response.data.newUser));
                 navigate('/home');
                 return;
             }
             if (response.status == 201) {
-                console.log('Already registered!', response.data)
                 localStorage.setItem('user', JSON.stringify(response.data.user))
                 navigate('/home');
                 return;
             }
         }).catch((err) => {
-            console.log(err.response.data);
-            console.log(err.response.status);
-            console.log(err.response.headers);
             if (err.response.status == 404) {
                 console.log('error occurred!')
             }
             if (err.response.status == 200) {
-                console.log(err.response.data);
                 localStorage.setItem('user', JSON.stringify(err.response.data.newUser))
                 navigate('/home');
                 return;
             }
             if (err.response.status == 201) {
-                console.log('Already registered!');
                 localStorage.setItem('user', JSON.stringify(err.response.data.user))
                 navigate('/home');
                 return;

@@ -48,7 +48,6 @@ const companyMailPassword = process.env.COMPANY_MAIL_PASSWORD;
 // };
 
 const createAccount = (req, res, responseMessage="") => {
-    console.log('req body is ', req.body.fullName);
     User.create({
         fullName: req.body.fullName,
         email: req.body.email,
@@ -66,7 +65,6 @@ const createAccount = (req, res, responseMessage="") => {
 }
 
 const signUpWithEmail = (req, res) => {
-    console.log('verify email called!');
     const salt = process.env.SALT || 'salt';
     const provider = req.body.provider;
     const verifyCode = req.body.verifyCode;
@@ -87,7 +85,6 @@ const signUpWithEmail = (req, res) => {
     .findOne({email: req.body.email})
     .then((user, err) => {
         if (err) {
-            console.log('Error occurred in finding user', err);
             res.status(404).json('Error occurred in finding user');
             return;
         }
@@ -98,10 +95,8 @@ const signUpWithEmail = (req, res) => {
         else {
             smtpTransport.sendMail(message).then((response, err) => {
                 if (!response) {
-                    console.log('Error occurred!', err);
                     res.status(503).json('Verification Error!')
                 } else {
-                    console.log('Message sent successfully!', response, req.body.email);
                     createAccount(req, res, response);
                 }
             })
@@ -110,7 +105,6 @@ const signUpWithEmail = (req, res) => {
 }
 
 const signUpWithGoogle = (req, res) => {
-    console.log("signUpwithGoogle Called!", req.body)
     User.findOne({email: req.body.email})
     .then((user, err) => {
         if(err) {
@@ -120,7 +114,6 @@ const signUpWithGoogle = (req, res) => {
         }
         else {
             if(user) {
-                console.log('already registered!', user)
                 res.status(201).json({message: 'Already registered', user});
                 return ;
             }
@@ -132,7 +125,6 @@ const signUpWithGoogle = (req, res) => {
 }
 
 const signIn = (req, res) => {
-    console.log("signin called!", req.body.email)
     User
     .findOne({email: req.body.email})
     .then((user, err) => {

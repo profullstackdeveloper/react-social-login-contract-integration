@@ -85,11 +85,9 @@ export default function Home() {
     const [fynTokenAmount, setFYNTokenAmount] = React.useState();
     const [signingResult, setSigningResult] = React.useState()
     const [showWarning, setShowWarning] = React.useState(false);
-    console.log("home component has been called!", currentAccount)
 
     React.useEffect(() => {
         if (currentAccount) {
-            console.log('toekn instance is ', currentChain)
             if (currentChain == '0x4') {
                 setShowWarning(false);
             }
@@ -108,17 +106,14 @@ export default function Home() {
         setFYNTokenAmount(fynAmount.data.toLocaleString('fullwide', { useGrouping: false }));
     }
     const checkSigning = async () => {
-        console.log(TestTokenContractInstance)
         const result = await TestTokenContractInstance.methods.GetSomeTokens().send({
             from: currentAccount
         })
         setSigningResult(result);
-        console.log(result);
     }
     React.useEffect(() => {
         if(signingResult) {
             Object.keys(signingResult).map((key, index) => {
-                console.log(key, signingResult[key]);
             })
         }
     }, [signingResult])

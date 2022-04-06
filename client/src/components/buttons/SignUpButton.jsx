@@ -34,7 +34,6 @@ export default function SignUpButton({ content, handleResolve, setAccount }) {
             ref={googleRef}
             client_id={"476229780716-ip4dhebu05l3nrhrghv7b1lojf5hka3c.apps.googleusercontent.com"}
             onResolve={async ({ provider, data }) => {
-                console.log(provider, data)
                 if (handleResolve) {
                     handleResolve(provider, data);
                 }

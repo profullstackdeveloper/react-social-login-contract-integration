@@ -10,7 +10,6 @@ export default function Web3ContextProvider({ children }) {
     const [currentChain, setCurrentChain] = React.useState();
     const [displayModal, setDisplayModal] = React.useState(true);
     React.useEffect(() => {
-        console.log('useeffect called!')
         if(window.ethereum) {
             setWalletStatus(true);
             setProvider(window.ethereum);
@@ -22,7 +21,6 @@ export default function Web3ContextProvider({ children }) {
         if(provider) {
             const web3 = new Web3(provider);
             web3.eth.getChainId().then((_chainId) => {
-                console.log("_chainId is ", _chainId.toString(16));
                 setCurrentChain('0x' + _chainId.toString(16));
             })
         }
@@ -30,11 +28,9 @@ export default function Web3ContextProvider({ children }) {
     React.useEffect(() => {
         if(window.ethereum) {
             window.ethereum.on('accountsChanged', (accounts) => {
-                console.log("account changed ! ", accounts[0]);
                 setCurrentAccount(accounts[0]);
             });
             window.ethereum.on('chainChanged', (chainId) => {
-                console.log("chainId is ", chainId)
                 setCurrentChain(chainId.toString(16));
             })
         }

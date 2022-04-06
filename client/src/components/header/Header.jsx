@@ -31,7 +31,6 @@ export default function Header() {
             setCurrentAccount(localStorage.getItem('account'))
         }
     }, [])
-    console.log(currentChain)
     return (
         <Container>
             {

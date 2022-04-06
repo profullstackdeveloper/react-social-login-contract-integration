@@ -22,7 +22,6 @@ const ButtonContainer = styled.div`
 
 const Button = ({content, handleClick, index, end, url}) => {
     const params = useParams();
-    console.log(params);
     return (
         <ButtonContainer index={index} end={end} onClick={() => handleClick(url)} active={params['*'] === url}>
             {content}
